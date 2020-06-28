@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/copadubo-react/static/css/main.31bcb2a9.chunk.css",
+    "main.js": "/copadubo-react/static/js/main.c8f021b5.chunk.js",
+    "main.js.map": "/copadubo-react/static/js/main.c8f021b5.chunk.js.map",
+    "runtime~main.js": "/copadubo-react/static/js/runtime~main.89ccb127.js",
+    "runtime~main.js.map": "/copadubo-react/static/js/runtime~main.89ccb127.js.map",
+    "static/js/2.b988fb5b.chunk.js": "/copadubo-react/static/js/2.b988fb5b.chunk.js",
+    "static/js/2.b988fb5b.chunk.js.map": "/copadubo-react/static/js/2.b988fb5b.chunk.js.map",
+    "index.html": "/copadubo-react/index.html",
+    "precache-manifest.45bb70e63af1b9802c8026e6df813130.js": "/copadubo-react/precache-manifest.45bb70e63af1b9802c8026e6df813130.js",
+    "service-worker.js": "/copadubo-react/service-worker.js",
+    "static/css/main.31bcb2a9.chunk.css.map": "/copadubo-react/static/css/main.31bcb2a9.chunk.css.map"
+  }
+}
