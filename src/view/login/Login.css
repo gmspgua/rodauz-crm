@@ -6,14 +6,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: linear-gradient(to right, #2b5876 0%, #e4e4d9 51%, #2b5876 100%);
+    background-image: linear-gradient(to right, #2b5876 0%, #fffff8 51%, #2b5876 100%);
     background-position: right center;
 }
 
 .box {
     width: 500px;
     height: 300px;
-    background: #e0d8d7;
+    background: white;
     border-style: solid;
     border-width: 1px;
     border-radius: 10px;
@@ -23,7 +23,7 @@
   .boxEmail {
     width: 500px;
     margin-top: 50px;
-    background:#e0d8d7;
+    background:white;
     border-radius: 5px;
     text-align: center;
     border-width: 10px;
@@ -32,7 +32,7 @@
 }
 
 .email {
-    background:#c9c2c1;
+    background:#f3eeed;
     margin-top: 10px;
     margin-left: 20%;
     margin-right: 15px;
@@ -59,7 +59,7 @@
 .button {
    
     width: 200px;
-    background-Image: linear-gradient(to right, #3a7bd5 0%, #3a6073 51%, #3a7bd5 100%);
+    background-Image: linear-gradient(to right, #146347 0%, #339b59 51%, #13835c 100%);
     background-Position: right center;
     box-shadow: -5px 5px 14px rgba(108, 111, 114, 0.45);
 }
@@ -69,4 +69,24 @@
     font-Size: 13px;
     padding-Top: 3px;
     width: 300px;
+}
+
+.bottom {
+  position: fixed;
+  bottom: 10px;
+  color: #0f394e;
+  font-family: serif;
+  text-shadow: 0.1mm 0.1mm 0.2mm black;
+
+  animation: go-back 3s infinite alternate;
+}
+
+
+@keyframes go-back {
+    from {
+        transform: translateX(100px);
+    }
+    to {
+        transform: translateX(-100px);
+    }
 }

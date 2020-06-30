@@ -3,15 +3,17 @@ import { Button, TextField, CircularProgress } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import HttpsRoundedIcon from '@material-ui/icons/HttpsRounded';
-import logo from '../images/logo.png'
+import logo from '../../images/logo.png'
 import "./Login.css";
 import firebase from '@firebase/app';
 import '@firebase/auth';
 import MuiAlert from '@material-ui/lab/Alert';
+import { connect } from 'react-redux';
+import { successLogin } from '../../actions';
 
 
 
-export default class Login extends Component {
+class Login extends Component {
 
     constructor(props) {
         super(props);
@@ -19,12 +21,14 @@ export default class Login extends Component {
             loading: false,
             messageError: '',
             email: '',
-            password: ''
+            password: '',
+            redirect: false
         }
 
         this.tryLogin = this.tryLogin.bind(this);
         this.onChangeHandle = this.onChangeHandle.bind(this);
         this.getErrorByErrorCode = this.getErrorByErrorCode.bind(this);
+        this.keyPressed = this.keyPressed.bind(this);
     }
 
 
@@ -57,27 +61,41 @@ export default class Login extends Component {
         }
     }
 
+    keyPressed(event) {
+        if (event.key === "Enter") {
+            this.tryLogin()
+        }
+    }
+
+    renderRedirect() {
+        if (this.state.redirect) {
+            this.props.history.push(`/cliente`)
+        }
+    }
+
     tryLogin() {
         this.setState({
             loading: true,
             messageError: null,
         })
         const { email, password } = this.state;
-        console.trace({ email });
-        console.trace({ password });
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(user => {
                 this.setState({
-                    loading: false
+                    loading: false,
+                    redirect: true
                 })
-            })
+
+                this.props.dispatchLoginSuccess(true);
+                this.renderRedirect();
+            }
+            )
             .catch(error => {
                 this.setState({
                     messageError: this.getErrorByErrorCode(error.code),
                     loading: false,
-
                 })
             })
     }
@@ -107,12 +125,14 @@ export default class Login extends Component {
                     <img src={logo} />
                 </div>
                 <div className="box">
+
                     <div className="boxEmail">
                         <div className="email">
                             <TextField
                                 placeholder="exemplo@provedor.com.br"
                                 id="input-with-icon-grid"
                                 className="textEmail"
+                                onKeyPress={this.keyPressed}
                                 defaultValue={this.state.email}
                                 onChange={event => this.onChangeHandle(event, 'email')}
                                 inputProps={{ maxLength: 31 }}
@@ -145,6 +165,7 @@ export default class Login extends Component {
                                 type="password"
                                 defaultValue={this.state.password}
                                 inputProps={{ maxLength: 20 }}
+                                onKeyPress={this.keyPressed}
                                 onChange={event => this.onChangeHandle(event, 'password')} InputProps={Object.assign({ disableUnderline: true },
                                     {
                                         startAdornment: (
@@ -193,7 +214,14 @@ export default class Login extends Component {
 
                     </div>
                 </div>
+                <div className='bottom'>
+                    © Copyright 2020 | Desenvolvido por GE2 Tecnologia
+            </div>
             </div>
         );
     }
 }
+
+export default connect(null, {
+    dispatchLoginSuccess: successLogin
+})(Login);
