@@ -15,10 +15,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
+import Tooltip from '@material-ui/core/Tooltip';
+import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
 
 
 
-const drawerWidth = 180;
+const drawerWidth = 100;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: drawerWidth,
         boxShadow: '-5px 5px 14px rgba(108, 111, 114, 0.45)',
-        backgroundImage: 'linear-gradient(to right, #06044a 0%, #14126e 51%, #06044a 100%)',
+        //backgroundImage: 'linear-gradient(to right, #A9A0F9 0%, #14126e 51%, #06044a 100%)',
+        backgroundColor: 'black'
     },
     drawerHeader: {
         display: 'flex',
@@ -47,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(0, 1),
         justifyContent: 'flex-end',
         minHeight: "10px",
-        backgroundColor: '#3f51b5',
+        backgroundColor: 'black',
 
     },
     content: {
@@ -69,19 +72,34 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 0,
     },
     ListItem: {
-        height: "35px",
+        height: "65px",
+        alignItems: 'center',
+        minWidth: '35px',
         "&:hover, &:focus": {
-            backgroundColor: '#3f51b5',
-            boxShadow: '-10px 10px 14px rgba(108, 111, 114, 0.45)',
-
+            backgroundColor: 'gray',
+            position: 'relative',
+            top: '3px',
+            left: '3px',
+            borderColor: '#000 #999 #999 #000',
         }
+
+    },
+    Icon: {
+        color: 'white',
+        height: '50px',
+        width: '50px',
+        "&:hover, &:focus": {
+            backgroundColor: '#00d142',
+            borderRadius: '70px',
+        }
+
+
     },
     ListItemText: {
         fontSize: "5px",
         color: "white",
         fontFamily: "Arial",
         textShadow: "1px 1px 1px #fff",
-        padding: "20px",
         paddingLeft: "3px",
     }
 }));
@@ -109,7 +127,7 @@ const MenuSideBar = (props) => {
                     [classes.appBarShift]: open,
                 })}>
                 <Toolbar
-                    style={{ minHeight: "10px" }}>
+                    style={{ minHeight: "10px", backgroundColor: '#00d142' }}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -137,19 +155,25 @@ const MenuSideBar = (props) => {
                 <img></img>
                 <div className={classes.drawerHeader}>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        {theme.direction === 'ltr' ? <ChevronLeftIcon style={{ color: 'white' }} /> : <ChevronRightIcon style={{ color: 'white' }} />}
                     </IconButton>
                 </div>
 
-                <List>
-                    <ListItem button className={classes.ListItem}>
-                        <ListItemIcon ><PersonRoundedIcon style={{ color: 'white' }} /></ListItemIcon>
-                        <ListItemText primary="Pessoa" className={classes.ListItemText} />
-                    </ListItem>
-                    <ListItem button className={classes.ListItem}>
-                        <ListItemIcon ><LocalOfferRoundedIcon style={{ color: 'white' }} /></ListItemIcon>
-                        <ListItemText primary="Produto" className={classes.ListItemText} />
-                    </ListItem>
+                <List style={{ marginTop: '10px', minWidth: '30px' }}>
+                    <Tooltip title="Contatos" placement="right">
+                        <ListItem button className={classes.ListItem}>
+                            <ListItemIcon style={{ minWidth: '30px' }}>
+                                <PersonRoundedIcon className={classes.Icon} fontSize="large" />
+                            </ListItemIcon>
+                        </ListItem>
+                    </Tooltip>
+                    <Tooltip title="Tarefas" placement="right">
+                        <ListItem button className={classes.ListItem} >
+                            <ListItemIcon>
+                                <BookmarkBorderOutlinedIcon className={classes.Icon} fontSize="small" />
+                            </ListItemIcon>
+                        </ListItem>
+                    </Tooltip>
                 </List>
             </Drawer>
             <main
