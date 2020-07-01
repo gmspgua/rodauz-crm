@@ -1,18 +1,11 @@
 import { SUCCESS_LOGIN } from '../actions';
 
-const INITIAL_STATE = {
-    authentication: false
-}
 
-const login = (state = INITIAL_STATE, action) => {
+
+const login = (state = '', action) => {
     switch (action.type) {
         case SUCCESS_LOGIN:
-            return [
-                {
-                    authentication: action.authentication
-
-                }
-            ]
+            return action.email
         default:
             return state
     }

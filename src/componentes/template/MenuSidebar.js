@@ -17,6 +17,7 @@ import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
 
 
+
 const drawerWidth = 180;
 
 const useStyles = makeStyles((theme) => ({
@@ -76,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     ListItemText: {
+        fontSize: "5px",
         color: "white",
         fontFamily: "Arial",
         textShadow: "1px 1px 1px #fff",
@@ -86,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuSideBar = (props) => {
 
-    const { children } = props;
+    const { children, email } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -117,7 +119,7 @@ const MenuSideBar = (props) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h20" noWrap>
-                        Gms21silva@hotmail.com
+                        {email}
                     </Typography>
                 </Toolbar>
             </AppBar>

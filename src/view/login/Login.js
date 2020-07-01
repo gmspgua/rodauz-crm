@@ -10,6 +10,8 @@ import '@firebase/auth';
 import MuiAlert from '@material-ui/lab/Alert';
 import { connect } from 'react-redux';
 import { successLogin } from '../../actions';
+import Cookies from 'universal-cookie';
+import { generateToken } from '../../util/generateJWT'
 
 
 
@@ -22,7 +24,6 @@ class Login extends Component {
             messageError: '',
             email: '',
             password: '',
-            redirect: false
         }
 
         this.tryLogin = this.tryLogin.bind(this);
@@ -47,7 +48,11 @@ class Login extends Component {
             measurementId: "G-SM1MRC0DR1"
         };
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        try {
+            firebase.initializeApp(firebaseConfig);
+        } catch (error) {
+            console.error('Firebase initialization error', error.stack)
+        }
     }
 
     getErrorByErrorCode(errorCode) {
@@ -68,12 +73,16 @@ class Login extends Component {
     }
 
     renderRedirect() {
-        if (this.state.redirect) {
-            this.props.history.push(`/cliente`)
-        }
+        this.props.history.push(`/cliente`)
     }
 
+    sayHi() {
+        alert('Hello');
+    }
+
+
     tryLogin() {
+        const cookies = new Cookies();
         this.setState({
             loading: true,
             messageError: null,
@@ -83,16 +92,17 @@ class Login extends Component {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(user => {
+                const token = generateToken(true);
+                cookies.set('axrs', token, { path: '/' })
                 this.setState({
                     loading: false,
-                    redirect: true
                 })
-
-                this.props.dispatchLoginSuccess(true);
-                this.renderRedirect();
+                this.props.dispatchLoginSuccess(email);
+                this.renderRedirect()
             }
             )
             .catch(error => {
+                console.trace({ error });
                 this.setState({
                     messageError: this.getErrorByErrorCode(error.code),
                     loading: false,
