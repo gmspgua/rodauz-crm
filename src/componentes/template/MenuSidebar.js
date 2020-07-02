@@ -14,13 +14,18 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
-import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
+import KeyboardArrowDownOutlinedIcon from '@material-ui/icons/KeyboardArrowDownOutlined';
 import Tooltip from '@material-ui/core/Tooltip';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
+import MenuList from '@material-ui/core/MenuList';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Fade from '@material-ui/core/Fade';
+import Logout from './Logout';
 
 
 
-const drawerWidth = 100;
+const drawerWidth = 80;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -102,14 +107,21 @@ const useStyles = makeStyles((theme) => ({
         textShadow: "1px 1px 1px #fff",
         paddingLeft: "3px",
     }
+
 }));
+
+
+
 
 const MenuSideBar = (props) => {
 
-    const { children, email } = props;
+    const { children, user, logout } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+
+    console.trace({ user })
+
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -118,6 +130,7 @@ const MenuSideBar = (props) => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
 
     return (
         <div className={classes.root}>
@@ -137,13 +150,11 @@ const MenuSideBar = (props) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h20" noWrap>
-                        {email}
+                        {user.email}
                     </Typography>
+                    <Logout logout={logout} />
                 </Toolbar>
             </AppBar>
-
-
-
             <Drawer
                 variant="persistent"
                 anchor="left"
@@ -161,7 +172,7 @@ const MenuSideBar = (props) => {
 
                 <List style={{ marginTop: '10px', minWidth: '30px' }}>
                     <Tooltip title="Contatos" placement="right">
-                        <ListItem button className={classes.ListItem}>
+                        <ListItem button className={classes.ListItem} onClick={(event) => console.log('cliquei')}>
                             <ListItemIcon style={{ minWidth: '30px' }}>
                                 <PersonRoundedIcon className={classes.Icon} fontSize="large" />
                             </ListItemIcon>
@@ -182,7 +193,7 @@ const MenuSideBar = (props) => {
                 })}>
                 <div style={{ marginTop: "30px", marginLeft: "200px" }}>{children}</div>
             </main>
-        </div>
+        </div >
     );
 }
 

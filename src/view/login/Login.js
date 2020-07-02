@@ -49,10 +49,17 @@ class Login extends Component {
         };
         // Initialize Firebase
         try {
-            firebase.initializeApp(firebaseConfig);
+            if (!firebase.apps.length) {
+                console.log('inicalizou firebase');
+                firebase.initializeApp(firebaseConfig);
+            } else {
+            }
         } catch (error) {
+            console.log('firebase');
+            console.log(error);
             console.error('Firebase initialization error', error.stack)
         }
+        console.log('saiu');
     }
 
     getErrorByErrorCode(errorCode) {
@@ -73,12 +80,10 @@ class Login extends Component {
     }
 
     renderRedirect() {
+        console.log('avila');
         this.props.history.push(`/cliente`)
     }
 
-    sayHi() {
-        alert('Hello');
-    }
 
 
     tryLogin() {
@@ -92,16 +97,22 @@ class Login extends Component {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(user => {
+                console.log('passou');
                 const token = generateToken(true);
                 cookies.set('axrs', token, { path: '/' })
                 this.setState({
                     loading: false,
                 })
-                this.props.dispatchLoginSuccess(email);
+
+                this.props.dispatchLoginSuccess({
+                    email,
+                    logged: true
+                });
                 this.renderRedirect()
             }
             )
             .catch(error => {
+                console.log('passouss');
                 console.trace({ error });
                 this.setState({
                     messageError: this.getErrorByErrorCode(error.code),

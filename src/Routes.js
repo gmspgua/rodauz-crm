@@ -29,8 +29,10 @@ class Routes extends Component {
         console.trace({ token });
         try {
             verifyToken(token);
+            console.log('sucesso');
             return true;
         } catch (error) {
+            console.log('insucesso');
             return false;
 
         }
@@ -40,6 +42,7 @@ class Routes extends Component {
     render() {
         const token = this.cookies.get('axrs');
         const valid = this.tokenValid(token);
+        console.trace({ valid });
         return (
             <BrowserRouter>
                 <div>
