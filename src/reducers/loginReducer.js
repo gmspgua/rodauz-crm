@@ -7,7 +7,7 @@ const login = (state = '', action) => {
         case SUCCESS_LOGIN:
             return {
                 email: action.user.email,
-                logged: action.user.logged
+                logged: true
             }
         case LOGOUT:
             return {

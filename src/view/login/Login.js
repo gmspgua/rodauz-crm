@@ -10,9 +10,7 @@ import '@firebase/auth';
 import MuiAlert from '@material-ui/lab/Alert';
 import { connect } from 'react-redux';
 import { successLogin } from '../../actions';
-import Cookies from 'universal-cookie';
-import { generateToken } from '../../util/generateJWT'
-
+import { setLocalStorage } from '../../util/localStorage'
 
 
 class Login extends Component {
@@ -32,11 +30,7 @@ class Login extends Component {
         this.keyPressed = this.keyPressed.bind(this);
     }
 
-
-
-
     componentDidMount() {
-        console.log('entrou');
         var firebaseConfig = {
             apiKey: "AIzaSyBZtIIeDxMYyAwPTI9ZqjbnuIj53j_PsLo",
             authDomain: "series-e5ead.firebaseapp.com",
@@ -47,7 +41,6 @@ class Login extends Component {
             appId: "1:252163341549:web:a18da88fabc08e226d60e4",
             measurementId: "G-SM1MRC0DR1"
         };
-        // Initialize Firebase
         try {
             if (!firebase.apps.length) {
                 console.log('inicalizou firebase');
@@ -55,11 +48,9 @@ class Login extends Component {
             } else {
             }
         } catch (error) {
-            console.log('firebase');
-            console.log(error);
+
             console.error('Firebase initialization error', error.stack)
         }
-        console.log('saiu');
     }
 
     getErrorByErrorCode(errorCode) {
@@ -79,15 +70,12 @@ class Login extends Component {
         }
     }
 
-    renderRedirect() {
-        console.log('avila');
-        this.props.history.push(`/cliente`)
+    redirect() {
+        setLocalStorage();
+        window.location.href = '/cliente';
     }
 
-
-
     tryLogin() {
-        const cookies = new Cookies();
         this.setState({
             loading: true,
             messageError: null,
@@ -97,9 +85,6 @@ class Login extends Component {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(user => {
-                console.log('passou');
-                const token = generateToken(true);
-                cookies.set('axrs', token, { path: '/' })
                 this.setState({
                     loading: false,
                 })
@@ -108,12 +93,10 @@ class Login extends Component {
                     email,
                     logged: true
                 });
-                this.renderRedirect()
+                this.redirect()
             }
             )
             .catch(error => {
-                console.log('passouss');
-                console.trace({ error });
                 this.setState({
                     messageError: this.getErrorByErrorCode(error.code),
                     loading: false,
@@ -153,6 +136,7 @@ class Login extends Component {
                                 placeholder="exemplo@provedor.com.br"
                                 id="input-with-icon-grid"
                                 className="textEmail"
+                                autoComplete='off'
                                 onKeyPress={this.keyPressed}
                                 defaultValue={this.state.email}
                                 onChange={event => this.onChangeHandle(event, 'email')}
@@ -177,16 +161,15 @@ class Login extends Component {
                             />
                         </div>
                         <div className="email">
-
                             <TextField
-
                                 id="standard-password-input"
                                 placeholder="*********"
-                                InputLabelProps={{ style: { fontWeight: "bold", textAlign: "center" } }}
+                                InputLabelProps={{ style: { fontWeight: "bold", textAlign: "center", visibility: "visible" } }}
                                 type="password"
                                 defaultValue={this.state.password}
                                 inputProps={{ maxLength: 20 }}
                                 onKeyPress={this.keyPressed}
+                                autoComplete="off"
                                 onChange={event => this.onChangeHandle(event, 'password')} InputProps={Object.assign({ disableUnderline: true },
                                     {
                                         startAdornment: (
@@ -211,7 +194,6 @@ class Login extends Component {
 
                         {!this.state.loading
                             ?
-
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -221,18 +203,13 @@ class Login extends Component {
                             >
                                 LOG IN
                             </Button>
-
                             :
-
                             <CircularProgress
                                 style={{ marginTop: "50px" }}
                                 size="20px"
                             />
 
                         }
-
-
-
                     </div>
                 </div>
                 <div className='bottom'>

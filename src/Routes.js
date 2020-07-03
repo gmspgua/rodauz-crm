@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import Cliente from './view/cliente/Cliente';
+import Contato from './view/contato/Contato';
 import Login from './view/login/Login';
+import Tarefa from './view/tarefa/Tarefa';
 import { verifyToken } from './util/generateJWT';
 import Cookies from 'universal-cookie';
+import { getLocalStorage } from './util/localStorage'
 
 
 
@@ -15,6 +18,10 @@ class Routes extends Component {
     constructor() {
         super();
         this.cookies = new Cookies();
+        this.state = {
+            valid: false,
+            token: ''
+        }
     }
 
     componentDidMount() {
@@ -26,13 +33,10 @@ class Routes extends Component {
 
     tokenValid = (token) => {
 
-        console.trace({ token });
         try {
             verifyToken(token);
-            console.log('sucesso');
             return true;
         } catch (error) {
-            console.log('insucesso');
             return false;
 
         }
@@ -40,14 +44,16 @@ class Routes extends Component {
     }
 
     render() {
-        const token = this.cookies.get('axrs');
-        const valid = this.tokenValid(token);
+        let token = getLocalStorage();
+        let valid = this.tokenValid(token);
         console.trace({ valid });
         return (
             <BrowserRouter>
                 <div>
                     <Route exact path="/" component={Login} />
                     <PrivateRoute exact path="/cliente" valid={valid} component={Cliente} />
+                    <PrivateRoute exact path="/tarefa" valid={valid} component={Tarefa} />
+                    <PrivateRoute exact path="/contato" valid={valid} component={Contato} />
                 </div>
             </BrowserRouter>
         );

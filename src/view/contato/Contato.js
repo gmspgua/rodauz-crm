@@ -5,14 +5,13 @@ import Template from '../../componentes/template/template';
 
 
 
-export default class Produto extends Component {
+export default class Contato extends Component {
 
     render() {
         return (
             <Template>
-                <div>Produto</div>
+                <div>Contato</div>
             </Template>
         );
     }
-
 }

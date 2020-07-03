@@ -10,12 +10,15 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { connect } from 'react-redux';
-import Route from './Routes'
+import Route from './Routes';
+import reduxThunk from 'redux-thunk';
+import createApiRequest from 'redux-api-request';
 
 
-const store = createStore(rootReducer, composeWithDevTools());
 
-
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(
+  reduxThunk
+)));
 
 ReactDOM.render(
   <Provider store={store}>

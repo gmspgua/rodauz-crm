@@ -12,20 +12,16 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
-import KeyboardArrowDownOutlinedIcon from '@material-ui/icons/KeyboardArrowDownOutlined';
 import Tooltip from '@material-ui/core/Tooltip';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
-import MenuList from '@material-ui/core/MenuList';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Fade from '@material-ui/core/Fade';
 import Logout from './Logout';
+import { Link } from "react-router-dom";
 
 
 
 const drawerWidth = 80;
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: drawerWidth,
         boxShadow: '-5px 5px 14px rgba(108, 111, 114, 0.45)',
-        //backgroundImage: 'linear-gradient(to right, #A9A0F9 0%, #14126e 51%, #06044a 100%)',
         backgroundColor: 'black'
     },
     drawerHeader: {
@@ -115,13 +110,11 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuSideBar = (props) => {
 
+
     const { children, user, logout } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-
-    console.trace({ user })
-
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -172,15 +165,15 @@ const MenuSideBar = (props) => {
 
                 <List style={{ marginTop: '10px', minWidth: '30px' }}>
                     <Tooltip title="Contatos" placement="right">
-                        <ListItem button className={classes.ListItem} onClick={(event) => console.log('cliquei')}>
+                        <ListItem button className={classes.ListItem} component={Link} to="/contato">
                             <ListItemIcon style={{ minWidth: '30px' }}>
                                 <PersonRoundedIcon className={classes.Icon} fontSize="large" />
                             </ListItemIcon>
                         </ListItem>
                     </Tooltip>
                     <Tooltip title="Tarefas" placement="right">
-                        <ListItem button className={classes.ListItem} >
-                            <ListItemIcon>
+                        <ListItem button className={classes.ListItem} component={Link} to="/tarefa">
+                            <ListItemIcon >
                                 <BookmarkBorderOutlinedIcon className={classes.Icon} fontSize="small" />
                             </ListItemIcon>
                         </ListItem>

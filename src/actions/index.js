@@ -1,4 +1,3 @@
-import { useParams } from "react-router";
 
 export const SUCCESS_LOGIN = 'SUCCESS_LOGIN';
 export const successLogin = user => ({
