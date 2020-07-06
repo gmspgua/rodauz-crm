@@ -85,9 +85,7 @@ class Login extends Component {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(user => {
-                this.setState({
-                    loading: false,
-                })
+
 
                 this.props.dispatchLoginSuccess({
                     email,
@@ -170,7 +168,8 @@ class Login extends Component {
                                 inputProps={{ maxLength: 20 }}
                                 onKeyPress={this.keyPressed}
                                 autoComplete="off"
-                                onChange={event => this.onChangeHandle(event, 'password')} InputProps={Object.assign({ disableUnderline: true },
+                                onChange={event => this.onChangeHandle(event, 'password')}
+                                InputProps={Object.assign({ disableUnderline: true },
                                     {
                                         startAdornment: (
                                             <InputAdornment position="end">

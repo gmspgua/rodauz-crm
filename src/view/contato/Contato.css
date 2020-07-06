@@ -1,0 +1,30 @@
+    .toolbar {
+        width: 100%;
+        min-Height: 40px;
+        height: 40px;
+        background-Color: rgb(114, 111, 111);
+        position: auto;
+        flex-direction: row;
+        display: flex;
+     }
+
+    .menuButton {
+        margin-Right: 2;
+    }
+
+    .title {
+        flex-Grow: 1;
+    }
+
+    .textfield {
+        background-color: rgb(177, 175, 175);
+        border-radius: 10px;
+        justify-content: flex-end;
+        margin-left: 10px;
+     
+     }
+
+     .textfield:hover  {
+        background-color: white,
+    }
+

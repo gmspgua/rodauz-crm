@@ -6,8 +6,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: linear-gradient(to right, #2b5876 0%, #fffff8 51%, #2b5876 100%);
-    background-position: right center;
+    background: linear-gradient(to right, #00b4db, #0083b0);
+    background-position: right center; 
+    position: "fixed";
 }
 
 .box {
@@ -18,6 +19,7 @@
     border-width: 1px;
     border-radius: 10px;
     box-shadow: -10px 10px 14px rgba(108, 111, 114, 0.45);
+    position: "fixed";
   }
 
   .boxEmail {
@@ -74,10 +76,8 @@
 .bottom {
   position: fixed;
   bottom: 10px;
-  color: #0f394e;
+  color: white;
   font-family: serif;
-  text-shadow: 0.1mm 0.1mm 0.2mm black;
-
   animation: go-back 3s infinite alternate;
 }
 

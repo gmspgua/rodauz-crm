@@ -9,7 +9,7 @@ export default class Tarefa extends Component {
 
     render() {
         return (
-            <Template>
+            <Template title={'Tarefas'}>
                 <div>Tarefa</div>
             </Template>
         );

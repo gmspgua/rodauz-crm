@@ -12,7 +12,7 @@ export default class Cliente extends Component {
     render() {
         return (
             <div>
-                <Template>
+                <Template title={'Cliente'}>
                     <div>Cliente</div>
                     <div>12345678901234567890</div>
                 </Template>

@@ -13,6 +13,7 @@ class Template extends Component {
         this.state = {
             navigate: false,
         }
+
     }
 
     redirect() {
@@ -21,10 +22,10 @@ class Template extends Component {
     }
 
     render() {
-
+        const { title } = this.props;
         return (
             < div className="template" >
-                <MenuSideBar user={this.props.user} logout={this.redirect} navigate={this.state.navigate}>
+                <MenuSideBar user={this.props.user} logout={this.redirect} navigate={this.state.navigate} title={title}>
                     {this.props.children}
                 </MenuSideBar>
             </div >

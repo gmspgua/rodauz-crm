@@ -101,6 +101,13 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "Arial",
         textShadow: "1px 1px 1px #fff",
         paddingLeft: "3px",
+    },
+    Children: {
+        marginTop: "25px",
+        marginLeft: "56px",
+        marginRight: "100px",
+        width: "100%",
+        position: "fixed",
     }
 
 }));
@@ -111,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuSideBar = (props) => {
 
 
-    const { children, user, logout } = props;
+    const { children, user, logout, title } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -142,8 +149,8 @@ const MenuSideBar = (props) => {
                         className={clsx(classes.menuButton, open && classes.hide)}>
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h20" noWrap>
-                        {user.email}
+                    <Typography variant="h6" align="center" style={{ width: "90%" }}>
+                        {title}
                     </Typography>
                     <Logout logout={logout} />
                 </Toolbar>
@@ -184,7 +191,7 @@ const MenuSideBar = (props) => {
                 className={clsx(classes.content, {
                     [classes.contentShift]: open,
                 })}>
-                <div style={{ marginTop: "30px", marginLeft: "200px" }}>{children}</div>
+                <div className={classes.Children}>{children}</div>
             </main>
         </div >
     );
