@@ -45,7 +45,6 @@ class Login extends Component {
             } else {
             }
         } catch (error) {
-
             console.error('Firebase initialization error', error.stack)
         }
     }
@@ -96,6 +95,8 @@ class Login extends Component {
                 })
             })
     }
+
+
 
     onChangeHandle = (event, key) => {
         const { value } = event.target;
