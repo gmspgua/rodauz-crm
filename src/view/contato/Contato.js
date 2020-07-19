@@ -1,19 +1,12 @@
 import React, { Component, Alert } from 'react';
 import '@firebase/auth';
 import Template from '../../componentes/template/template';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import "./Contato.css";
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import { StickyHeadTable } from '../../componentes/table/StickyHeadTable';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import SimpleModal from '../../componentes/modal/modalContato'
-
+import { TableContact } from '../../componentes/ContactTable';
+import SimpleModal from '../../componentes/ContactDetailModal';
+import SearchField from '../../componentes/SearchField'
 
 
 export default class Contato extends Component {
@@ -36,6 +29,7 @@ export default class Contato extends Component {
 
 
     componentDidMount() {
+        console.log('carregou');
 
         const lista = [
             this.createData('India', 'IN', 1324171354, 3287263),
@@ -87,6 +81,7 @@ export default class Contato extends Component {
         this.setState({ modalEnable: true })
     }
 
+
     render() {
         return (
             <Template title={'Contatos'}>
@@ -94,32 +89,10 @@ export default class Contato extends Component {
                     className="toolbar"
                     style={{ minHeight: "30px" }}>
                     < SimpleModal />
-                    <TextField
-                        id="standard-size-small"
-                        size="small"
-                        onChange={e => this._handleFilteredFields(e)}
-                        className="textfield"
-                        autoComplete="off"
-                        style={{ marginLeft: "10px", paddingTop: "15px", paddingLeft: "1px", height: "15px" }}
-                        InputProps={Object.assign({ disableUnderline: true },
-                            {
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <SearchOutlinedIcon color="primary" fontSize="small" />
-                                    </InputAdornment>
-                                )
-                            },
-                            {
-                                style: {
-                                    paddingLeft: "5px",
-                                }
-                            }
-                        )}
-                    />
+                    <SearchField handleFilteredFields={this._handleFilteredFields} />
                 </Toolbar>
-
                 {this.state.rowsFiltered.length > 0 ?
-                    <StickyHeadTable rows={this.state.rowsFiltered} />
+                    <TableContact rows={this.state.rowsFiltered} />
                     :
                     <div>informação não encontradas</div>
                 }

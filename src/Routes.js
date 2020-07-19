@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
-import Cliente from './view/cliente/Cliente';
 import Contato from './view/contato/Contato';
 import Login from './view/login/Login';
 import Tarefa from './view/tarefa/Tarefa';
@@ -13,7 +12,6 @@ import { getLocalStorage } from './util/localStorage'
 
 
 class Routes extends Component {
-
 
     constructor() {
         super();
@@ -28,30 +26,22 @@ class Routes extends Component {
         console.log('==== Routes mounted!');
     }
 
-
-
-
     tokenValid = (token) => {
-
         try {
             verifyToken(token);
             return true;
         } catch (error) {
             return false;
-
         }
-
     }
 
     render() {
         let token = getLocalStorage();
         let valid = this.tokenValid(token);
-        console.trace({ valid });
         return (
             <BrowserRouter>
                 <div>
                     <Route exact path="/" component={Login} />
-                    <PrivateRoute exact path="/cliente" valid={valid} component={Cliente} />
                     <PrivateRoute exact path="/tarefa" valid={valid} component={Tarefa} />
                     <PrivateRoute exact path="/contato" valid={valid} component={Contato} />
                 </div>

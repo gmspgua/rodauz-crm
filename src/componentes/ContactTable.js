@@ -12,27 +12,9 @@ import TableRow from '@material-ui/core/TableRow';
 const columns = [
     { id: 'nome', label: 'Nome', minWidth: 170 },
     { id: 'telefone', label: 'Telefone', minWidth: 100 },
-    {
-        id: 'population',
-        label: 'E-mail',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'size',
-        label: 'Segmento',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
-    },
-    {
-        id: 'density',
-        label: 'Data Cadastro',
-        minWidth: 170,
-        align: 'right',
-        format: (value) => value.toFixed(2),
-    },
+    { id: 'population', label: 'E-mail', minWidth: 170, align: 'right', format: (value) => value.toLocaleString('en-US') },
+    { id: 'size', label: 'Segmento', minWidth: 170, align: 'right', format: (value) => value.toLocaleString('en-US') },
+    { id: 'density', label: 'Data Cadastro', minWidth: 170, align: 'right', format: (value) => value.toFixed(2) },
 ];
 
 function createData(nome, telefone, population, size) {
@@ -51,7 +33,7 @@ const useStyles = makeStyles({
     },
 });
 
-export const StickyHeadTable = (props) => {
+export const TableContact = (props) => {
     const { rows } = props;
     const classes = useStyles();
     const [page, setPage] = React.useState(0);

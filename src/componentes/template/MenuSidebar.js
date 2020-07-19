@@ -15,8 +15,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import PersonRoundedIcon from '@material-ui/icons/PersonRounded';
 import Tooltip from '@material-ui/core/Tooltip';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
-import Logout from './Logout';
+import Logout from '../Logout';
 import { Link } from "react-router-dom";
+import logo_pequeno from '../../images/logo_pequeno.png'
 
 
 
@@ -149,6 +150,10 @@ const MenuSideBar = (props) => {
                         className={clsx(classes.menuButton, open && classes.hide)}>
                         <MenuIcon />
                     </IconButton>
+                    <img src={logo_pequeno}
+                        alt="Flowers in Chania"
+                        width="120"
+                        height="47" />
                     <Typography variant="h6" align="center" style={{ width: "90%" }}>
                         {title}
                     </Typography>

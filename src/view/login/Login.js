@@ -1,16 +1,13 @@
-import React, { Component, Alert } from 'react';
-import { Button, TextField, CircularProgress } from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import HttpsRoundedIcon from '@material-ui/icons/HttpsRounded';
-import logo from '../../images/logo.png'
+import React, { Component } from 'react';
+import { Button, CircularProgress } from '@material-ui/core';
 import "./Login.css";
 import firebase from '@firebase/app';
 import '@firebase/auth';
-import MuiAlert from '@material-ui/lab/Alert';
 import { connect } from 'react-redux';
 import { successLogin } from '../../actions';
 import { setLocalStorage } from '../../util/localStorage'
+import { LoginBottom, LoginEmailField, LoginPasswordField, LoginLogo, LoginButton } from '../../componentes/login';
+import ErrorMessage from '../../componentes/ErrorMessage'
 
 
 class Login extends Component {
@@ -72,7 +69,7 @@ class Login extends Component {
 
     redirect() {
         setLocalStorage();
-        window.location.href = '/cliente';
+        window.location.href = '/contato';
     }
 
     tryLogin() {
@@ -85,8 +82,6 @@ class Login extends Component {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(user => {
-
-
                 this.props.dispatchLoginSuccess({
                     email,
                     logged: true
@@ -102,119 +97,40 @@ class Login extends Component {
             })
     }
 
-
-
     onChangeHandle = (event, key) => {
-        console.trace({ event })
         const { value } = event.target;
         this.setState({ [key]: value });
     }
 
-
-
     render() {
         return (
             <div class="container">
-                {this.state.messageError
-                    ?
-                    <MuiAlert elevation={6} variant="filled" severity="error" style={{ width: "100%" }}>
-                        {this.state.messageError}
-                    </MuiAlert>
-                    :
-                    null}
-
-                <div class="logo">
-                    <img src={logo} />
-                </div>
+                <LoginLogo />
                 <div className="box">
+                    {this.state.messageError ?
+                        <ErrorMessage messageError={this.state.messageError} /> : null}
+                    <div className="boxCenter">
+                        <LoginEmailField
+                            keyPressed={this.keyPressed}
+                            onChangeHandle={(event) => this.onChangeHandle(event, 'email')}
+                            defaultValue={this.state.user} />
 
-                    <div className="boxEmail">
-                        <div className="email">
-                            <TextField
-                                placeholder="exemplo@provedor.com.br"
-                                id="input-with-icon-grid"
-                                className="textEmail"
-                                autoComplete='off'
-                                onKeyPress={this.keyPressed}
-                                defaultValue={this.state.email}
-                                onChange={event => this.onChangeHandle(event, 'email')}
-                                inputProps={{ maxLength: 31 }}
-                                InputProps={Object.assign({ disableUnderline: true },
-                                    {
-                                        startAdornment: (
-                                            <InputAdornment position="end" variant="filled">
-                                                <PersonIcon color="primary"
-                                                    style={{ paddingRight: "20px" }}
-                                                />
-                                            </InputAdornment>
-                                        ),
-                                    }, {
-                                    style: {
-                                        textAlign: 'center',
-                                        fontSize: "13px",
-                                        paddingTop: "3px",
-                                        width: "300px",
-                                    }
-                                })}
-                            />
-                        </div>
-                        <div className="email">
-                            <TextField
-                                id="standard-password-input"
-                                placeholder="*********"
-                                InputLabelProps={{ style: { fontWeight: "bold", textAlign: "center", visibility: "visible" } }}
-                                type="password"
-                                defaultValue={this.state.password}
-                                inputProps={{ maxLength: 20 }}
-                                onKeyPress={this.keyPressed}
-                                autoComplete="off"
-                                onChange={event => this.onChangeHandle(event, 'password')}
-                                InputProps={Object.assign({ disableUnderline: true },
-                                    {
-                                        startAdornment: (
-                                            <InputAdornment position="end">
-                                                <HttpsRoundedIcon color="primary"
-                                                    style={{ paddingRight: "20px" }}
-                                                />
-                                            </InputAdornment>
-                                        ),
-                                    }, {
-                                    style: {
-                                        textAlign: 'center',
-                                        fontSize: "13px",
-                                        paddingTop: "3px",
-                                        width: "300px",
-                                    }
-                                }
-
-                                )}
-                            />
-                        </div>
+                        <LoginPasswordField
+                            keyPressed={this.keyPressed}
+                            onChangeHandle={(event) => this.onChangeHandle(event, 'password')}
+                            defaultValue={this.state.password} />
 
                         {!this.state.loading
                             ?
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                className="button"
-                                style={{ marginTop: "50px" }}
-                                onClick={() => this.tryLogin()}
-                            >
-                                LOG IN
-                            </Button>
+                            <LoginButton onClick={this.tryLogin} label="LOG IN" />
                             :
-                            <CircularProgress
-                                style={{ marginTop: "50px" }}
-                                size="20px"
-                            />
-
+                            <CircularProgress style={{ marginTop: "50px" }} size="20px" />
                         }
+
                     </div>
                 </div>
-                <div className='bottom'>
-                    © Copyright 2020 | Desenvolvido por GE2 Tecnologia
-            </div>
-            </div>
+                <LoginBottom />
+            </div >
         );
     }
 }

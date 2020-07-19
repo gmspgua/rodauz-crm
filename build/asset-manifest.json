@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/copadubo-react/static/css/main.31bcb2a9.chunk.css",
-    "main.js": "/copadubo-react/static/js/main.c8f021b5.chunk.js",
-    "main.js.map": "/copadubo-react/static/js/main.c8f021b5.chunk.js.map",
+    "main.css": "/copadubo-react/static/css/main.64116d45.chunk.css",
+    "main.js": "/copadubo-react/static/js/main.57ac28aa.chunk.js",
+    "main.js.map": "/copadubo-react/static/js/main.57ac28aa.chunk.js.map",
     "runtime~main.js": "/copadubo-react/static/js/runtime~main.89ccb127.js",
     "runtime~main.js.map": "/copadubo-react/static/js/runtime~main.89ccb127.js.map",
-    "static/js/2.b988fb5b.chunk.js": "/copadubo-react/static/js/2.b988fb5b.chunk.js",
-    "static/js/2.b988fb5b.chunk.js.map": "/copadubo-react/static/js/2.b988fb5b.chunk.js.map",
+    "static/js/2.9b00b9f9.chunk.js": "/copadubo-react/static/js/2.9b00b9f9.chunk.js",
+    "static/js/2.9b00b9f9.chunk.js.map": "/copadubo-react/static/js/2.9b00b9f9.chunk.js.map",
     "index.html": "/copadubo-react/index.html",
-    "precache-manifest.45bb70e63af1b9802c8026e6df813130.js": "/copadubo-react/precache-manifest.45bb70e63af1b9802c8026e6df813130.js",
+    "precache-manifest.e7cca4e5d858c2cb6401989307dbc00c.js": "/copadubo-react/precache-manifest.e7cca4e5d858c2cb6401989307dbc00c.js",
     "service-worker.js": "/copadubo-react/service-worker.js",
-    "static/css/main.31bcb2a9.chunk.css.map": "/copadubo-react/static/css/main.31bcb2a9.chunk.css.map"
+    "static/css/main.64116d45.chunk.css.map": "/copadubo-react/static/css/main.64116d45.chunk.css.map",
+    "static/media/logo.png": "/copadubo-react/static/media/logo.2b7c5baa.png"
   }
 }
